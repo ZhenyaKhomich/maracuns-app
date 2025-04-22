@@ -1,0 +1,166 @@
+@media (hover: hover) {
+  .menu-item:hover a {
+    border-bottom: 2px solid #821328;
+  }
+}
+
+.header-block {
+  background: #eba8b1;
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.header .logo {
+  padding: 38px 0 29px 0;
+}
+
+.header .logo a {
+  display: flex;
+}
+
+
+.menu ul {
+  display: flex;
+  max-width: 320px;
+  gap: 40px;
+}
+
+.menu-item {
+  list-style: none;
+  text-decoration: none;
+}
+
+.menu-item a {
+  text-decoration: none;
+  font-size: 14px;
+  font-family: GilroyMedium, sans-serif;
+  color: rgb(119, 11, 29);
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.5s ease-in-out;
+}
+
+.burger-wrap {
+  width: 40px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 141;
+}
+
+.burger {
+  display: none;
+  background: rgb(130, 19, 40);
+  width: 40px;
+  height: 2px;
+  position: relative;
+}
+
+.burger::before {
+  content: "";
+  height: 2px;
+  background: rgb(130, 19, 40);
+  width: 40px;
+  position: absolute;
+  top: -8px;
+  right: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.burger::after {
+  content: "";
+  height: 2px;
+  background: rgb(130, 19, 40);
+  position: absolute;
+  width: 40px;
+  right: 0;
+  top: 8px;
+  transition: all 0.2s ease-in-out;
+}
+
+.burger.close {
+  width: 0;
+  position: fixed;
+  right: 20px;
+}
+
+.burger.close::after {
+  transform: rotate(45deg) translate(0, -11px);
+}
+
+.burger.close::before {
+  transform: rotate(-45deg) translate(0, 11px);
+}
+
+.phone {
+  font-size: 16px;
+  font-family: GilroyBold, sans-serif;
+  color: rgb(255, 255, 255);
+}
+
+@media screen and (max-width: 1200px) {
+  .header .container {
+    padding: 0 20px;
+  }
+}
+
+@media screen and (max-width: 829px) {
+
+  .header-phone {
+    display: none;
+  }
+
+  .menu {
+    margin-right: 198px;
+  }
+}
+
+@media screen and (max-width: 767.5px) {
+  .header .container {
+    padding: 0 15px;
+  }
+
+  .menu.open {
+    display: block;
+    background: rgba(81, 73, 73, 0.9);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 140;
+  }
+
+  .menu {
+    display: none;
+    margin-right: 0;
+  }
+
+  .menu ul {
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    width: 100%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .menu-item a {
+    font-size: 25px;
+  }
+
+  .burger {
+    display: block;
+    position: relative;
+    z-index: 141;
+  }
+}
