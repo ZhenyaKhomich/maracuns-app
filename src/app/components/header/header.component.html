@@ -1,1 +1,29 @@
+<header class="header header-block">
+  <div class="container">
+    <div class="logo">
+      <a href="#">
+        <img src="images/logo.png" alt="logo" loading="lazy">
+      </a>
+    </div>
+    <nav class="menu">
+      <ul>
+        <li class="menu-item">
+          <a href="#" (click)="clickLinks('products')">Пироженки</a>
+        </li>
+        <li class="menu-item">
+          <a href="#"(click)="clickLinks('about')">О нас</a>
+        </li>
+        <li class="menu-item">
+          <a href="#" (click)="clickLinks('order')">Оформить заказ</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="burger-wrap">
+      <div class="burger"></div>
+    </div>
 
+    <div class="phone header-phone">
+      {{phone | numberPhone}}
+    </div>
+  </div>
+</header>

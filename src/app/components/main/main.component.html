@@ -1,32 +1,4 @@
-<header class="header header-block">
-  <div class="container">
-    <div class="logo">
-      <a href="#">
-        <img src="images/logo.png" alt="logo" loading="lazy">
-      </a>
-    </div>
-    <nav class="menu">
-      <ul>
-        <li class="menu-item">
-          <a href="#" (click)="scroll(products)">Пироженки</a>
-        </li>
-        <li class="menu-item">
-          <a href="#" (click)="scroll(about)">О нас</a>
-        </li>
-        <li class="menu-item">
-          <a href="#" (click)="scroll(order)">Оформить заказ</a>
-        </li>
-      </ul>
-    </nav>
-    <div class="burger-wrap">
-      <div class="burger"></div>
-    </div>
-
-    <div class="phone header-phone">
-      {{phone}}
-    </div>
-  </div>
-</header>
+<header-component [phone]="phone" (clickLinkHeader)="scroll($event)"></header-component>
 <section class="main main-block">
   <div class="container">
     <div class="main-info">
@@ -34,7 +6,7 @@
       <div class="main-info-text">
         Побалуйте себя и своих близких самыми вкусными и ароматными домашними пироженками Macaroon!
       </div>
-      <button class="button main-button" (click)="scroll(products)">Выбрать макарун</button>
+      <button class="button main-button" styleButtons [styleButtonsDirectiveColorHover]="'linear-gradient(90deg, rgb(215, 72, 92) 0%, rgb(105, 72, 92) 100%)'" (click)="scroll('', products)">Выбрать макарун</button>
     </div>
     <div class="main-image">
       <img src="images/cakes.png" alt="cakes" loading="lazy">
@@ -60,39 +32,13 @@
         <img src="images/makarunbig.png" alt="makarun" loading="lazy">
       </div>
     </div>
-    <div class="advantages-list">
-      <div class="advantage" *ngFor="let advantage of advantages; let i = index">
-        <div class="advantage-number">
-          <span>{{ i + 1 }}</span>
-        </div>
-        <div class="advantage-title">{{ advantage.title }}</div>
-        <div class="advantage-text">
-          {{ advantage.description }}
-        </div>
-      </div>
-    </div>
+    <advantages-component [advantages]="advantages"></advantages-component>
   </div>
 </section>
 <section class="products" #products>
   <div class="container">
     <h2 class="products-title h2-title">Выберите свой макарун</h2>
-    <div class="products-list">
-      <div class="product" *ngFor="let maracun of maracuns; let i = index">
-        <div class="product-img">
-          <img src="/images/{{maracun.image}}" alt="macarun{{i + 1}}" loading="lazy">
-        </div>
-        <div class="product-title">{{ maracun.title }}</div>
-        <div class="product-info">
-          <div class="product-col-price">
-            <div class="col">{{ maracun.quantity }}шт.</div>
-            <div class="price">{{ maracun.price }} руб.</div>
-          </div>
-          <div class="product-button">
-            <button class="button product-button" (click)="clickOrder(maracun, order)">Заказать</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <products-component [maracuns]="maracuns" (clickOrderBtn)="clickOrder($event, order)"></products-component>
   </div>
 </section>
 <section class="order" #order>
@@ -117,7 +63,7 @@
         <label>
           <input type="text" name="phone" placeholder="+375 (__) ___ - __ - __">
         </label>
-        <button type="submit" class="button button-order">Оформить заказ</button>
+        <button type="submit" styleButtons [styleButtonsDirectiveColorHover]="'linear-gradient(90deg, rgb(215, 72, 92) 0%, rgb(105, 72, 92) 100%)'" class="button button-order">Оформить заказ</button>
       </form>
     </div>
     <img class="berry2" src="images/berry2.png" alt="berry2" loading="lazy">
@@ -125,32 +71,15 @@
   </div>
 </section>
 
-<footer class="footer">
-  <div class="container">
-    <div class="logo logo-footer">
-      <a href="#">
-        <img src="images/logo.png" alt="logo">
-      </a>
-      <div class="rights">
-        Все права защищены, 2020
-      </div>
-    </div>
-    <div class="socials">
-      <img src="images/instagram.png" alt="instagram">
-      <a [href]="hrefInstagram" class="socials-text">Мы в Instagram</a>
-    </div>
-    <div class="phone footer-phone">
-      {{ phone }}
-    </div>
-  </div>
-</footer>
+<footer-component [phone]="phone"></footer-component>
 
 <div class="present" *ngIf="showPresent">
   <div class="present-img">
-    <img src="images/present.png" alt="present">
+    <div class="count-product">{{getSumBasket.colInBasket}}</div>
+    <img src="images/basket.png" alt="present">
   </div>
   <div class="tooltip">
-    <div class="tooltip-text">Оформите заказ <br>и получите подарок!</div>
+    <div class="tooltip-text">{{getSumBasket.sumBasket | number:'1.2-2'}} руб. </div>
     <img class="figure1" src="images/figure1.png" alt="figura1">
     <img class="figure2" src="images/figure2.png" alt="figura2">
     <img class="figure3" src="images/figure3.png" alt="figura3">

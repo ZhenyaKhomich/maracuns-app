@@ -7,13 +7,9 @@ import {FooterComponent} from './components/footer/footer.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [MainComponent, FooterComponent],
+  imports: [MainComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  public scroll(element: HTMLElement) {
-    element.scrollIntoView({behavior: "smooth"});
-  }
-
 }

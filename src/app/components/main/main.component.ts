@@ -1,7 +1,15 @@
-import {Component, NgModule} from '@angular/core';
-import {NgForOf, NgIf} from '@angular/common';
+import {Component, ElementRef, NgModule, OnInit, ViewChild} from '@angular/core';
+import {CurrencyPipe, DecimalPipe, NgForOf, NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {MaracunsType} from '../../types/maracuns.type';
+import {FooterComponent} from '../footer/footer.component';
+import {HeaderComponent} from '../header/header.component';
+import {GetProductsService} from '../../services/get-products.service';
+import {SumProductsBasketService} from '../../services/sum-products-basket.service';
+import {AdvantagesComponent} from '../advantages/advantages.component';
+import {AdvantagesType} from '../../types/advantages.type';
+import {ProductsComponent} from '../products/products.component';
+import {StyleButtonsDirective} from '../../directives/style-buttons.directive';
 
 @Component({
   selector: 'main-component',
@@ -9,13 +17,23 @@ import {MaracunsType} from '../../types/maracuns.type';
   imports: [
     NgForOf,
     FormsModule,
-    NgIf
+    NgIf,
+    FooterComponent,
+    HeaderComponent,
+    AdvantagesComponent,
+    ProductsComponent,
+    DecimalPipe,
+    StyleButtonsDirective
   ],
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss', '../header/header.component.scss', '../footer/footer.component.scss']
 })
 export class MainComponent {
-  public advantages = [
+
+  constructor(public getMaracuns: GetProductsService,
+              public getSumBasket: SumProductsBasketService) {}
+
+  public advantages: AdvantagesType[] = [
     {
       title: 'Лучшие продукты',
       description: 'Мы честно готовим макаруны только из натуральных и качественных продуктов. Мы не используем консерванты, ароматизаторы и красители.'
@@ -34,31 +52,14 @@ export class MainComponent {
     }
   ]
 
-  public maracuns: MaracunsType[] = [
-    {
-      image: 'makarun1.png',
-      title: 'Макарун с малиной',
-      quantity: '1',
-      price: '1,70'
-    },
-    {
-      image: 'makarun2.png',
-      title: 'Макарун с манго',
-      quantity: '1',
-      price: '1,70'
-    },
-    {
-      image: 'makarun3.png',
-      title: 'Пирог с ванилью',
-      quantity: '1',
-      price: '1,70'
-    }, {
-      image: 'makarun4.png',
-      title: 'Пирог с фисташками',
-      quantity: '1',
-      price: '1,70'
-    }
-  ]
+  public maracuns: MaracunsType[] | null = null;
+  public showPresent: boolean = true;
+  public phone = '375293689868';
+
+
+  ngOnInit() {
+    this.maracuns = this.getMaracuns.getProducts();
+  }
 
   public formObjectValue = {
     maracun: '',
@@ -66,18 +67,29 @@ export class MainComponent {
     phone: ''
   }
 
-  public showPresent: boolean = false;
-  public phone = '+375 (29) 368-98-68';
-  public hrefInstagram = 'https://instagram.com';
+  @ViewChild('products') products!: ElementRef;
+  @ViewChild('about') about!: ElementRef;
+  @ViewChild('order') order!: ElementRef;
 
-
-
-  public scroll(element: HTMLElement) {
-    element.scrollIntoView({behavior: "smooth"});
+  public scroll(el: string, element?: HTMLElement) {
+    if (element) {
+      element.scrollIntoView({behavior: "smooth"});
+    } else if (el) {
+      if (el === 'products') {
+        this.products.nativeElement.scrollIntoView({behavior: "smooth"});
+      } else if (el === 'about') {
+        this.about.nativeElement.scrollIntoView({behavior: "smooth"});
+      } else if (el === 'order') {
+        this.order.nativeElement.scrollIntoView({behavior: "smooth"});
+      }
+    }
   }
 
   public clickOrder(maracun: MaracunsType, element: HTMLElement): void {
     element.scrollIntoView({behavior: "smooth"});
-    this.formObjectValue.maracun = maracun.title.toUpperCase()
+    this.formObjectValue.maracun = maracun.title.toUpperCase();
+    this.getSumBasket.colInBasket++;
+    this.getSumBasket.sumBasket += maracun.price;
+    alert(`${maracun.title}, добавлен в корзину!`)
   }
 }

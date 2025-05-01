@@ -1,0 +1,17 @@
+<div class="products-list">
+  <div class="product" *ngFor="let maracun of maracuns; let i = index">
+    <div class="product-img">
+      <img src="/images/{{maracun.image}}" alt="macarun{{i + 1}}" loading="lazy">
+    </div>
+    <div class="product-title">{{ maracun.title }}</div>
+    <div class="product-info">
+      <div class="product-col-price">
+        <div class="col">{{ maracun.quantity }}шт.</div>
+        <div class="price">{{ maracun.price | number:'1.2-2'}} руб.</div>
+      </div>
+      <div class="product-button">
+        <button class="button product-button" styleButtons (click)="clickOrder(maracun)">Заказать</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -219,7 +219,27 @@ body {
   max-width: 1170px;
   margin: 0 auto;
 }
+@media (hover: hover) {
+  .button:hover {
+    box-shadow: 0 5px 9px 1px rgba(130, 19, 40, 0.5);
+  }
+}
 
+
+.button {
+  background-image: -moz-linear-gradient(90deg, rgb(113, 8, 30) 0%, rgb(215, 72, 92) 100%);
+  background-image: -webkit-linear-gradient(90deg, rgb(113, 8, 30) 0%, rgb(215, 72, 92) 100%);
+  background-image: -ms-linear-gradient(90deg, rgb(113, 8, 30) 0%, rgb(215, 72, 92) 100%);
+  border: 0;
+  outline: none;
+  border-radius: 30px;
+  font-size: 18px;
+  font-family: GilroyBold, sans-serif;
+  color: rgb(255, 255, 255);
+  line-height: 1;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease-in-out;
+}
 
 
 

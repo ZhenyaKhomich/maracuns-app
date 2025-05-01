@@ -1,0 +1,11 @@
+<div class="advantages-list">
+  <div class="advantage" *ngFor="let advantage of advantages; let i = index">
+    <div class="advantage-number">
+      <span>{{ i + 1 }}</span>
+    </div>
+    <div class="advantage-title">{{ advantage.title }}</div>
+    <div class="advantage-text">
+      {{ advantage.description | sliceText }}
+    </div>
+  </div>
+</div>
