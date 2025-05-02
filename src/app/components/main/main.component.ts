@@ -15,7 +15,6 @@ import {StyleButtonsDirective} from '../../directives/style-buttons.directive';
   selector: 'main-component',
   standalone: true,
   imports: [
-    NgForOf,
     FormsModule,
     NgIf,
     FooterComponent,

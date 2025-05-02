@@ -1,0 +1,15 @@
+<div class="product" >
+  <div class="product-img">
+    <img src="/images/{{maracun.image}}" alt="macarun{{i + 1}}" loading="lazy">
+  </div>
+  <div class="product-title">{{ maracun.title }}</div>
+  <div class="product-info">
+    <div class="product-col-price">
+      <div class="col">{{ maracun.quantity }}шт.</div>
+      <div class="price">{{ maracun.price | currency: "RUB": "руб."}}</div>
+    </div>
+    <div class="product-button">
+      <button class="button product-button" styleButtons (click)="clickOrderProductsCart(maracun)">Заказать</button>
+    </div>
+  </div>
+</div>

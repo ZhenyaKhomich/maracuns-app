@@ -13,7 +13,6 @@ export class HeaderComponent {
 @Output() clickLinkHeader = new EventEmitter<string>();
 
 clickLinks(element:string) {
-  console.log(element)
   this.clickLinkHeader.emit(element);
 }
 }
